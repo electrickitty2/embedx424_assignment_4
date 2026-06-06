@@ -11,11 +11,11 @@ from machine import LED
 #
 # Settings
 #
-MODEL                = "custom_objects_int8_float_io.tflite"
-MODEL                = "custom_objects_int8_float_io.tflite"
-MODEL                = "custom_objects_int8_float_io.tflite"
-MODEL                = "custom_objects_int8_float_io.tflite"
-MODEL                = "custom_objects_int8_float_io.tflite"
+MODEL                = "custom_objects_dynamic_range.tflite"
+#MODEL                = "custom_objects_float16.tflite"
+#MODEL                = "custom_objects_float32.tflite"
+#MODEL                = "custom_objects_int8_float_io.tflite"
+#MODEL                = "custom_objects_int8.tflite"
 LABELS               = ['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash']
 CONFIDENCE_THRESHOLD = 0.6   # minimum confidence to accept a prediction
 DEBOUNCE_FRAMES      = 10    # frames a class must hold before updating the LED
@@ -41,7 +41,7 @@ net = ml.Model(MODEL, load_to_fb=True)
 # Configure camera to match training: RGB565, 64x64
 #
 sensor.reset()
-sensor.set_pixformat(sensor.RGB565)           # 3-channel color, matches training
+sensor.set_pixformat(sensor.GRAYSCALE)        # B&W, matches training
 sensor.set_framesize(sensor.B64X64)           # native 64x64 sensor format
 sensor.set_windowing((64, 64))                # crop to 64x64 input
 sensor.skip_frames(time=2000)                 # let the camera settle
